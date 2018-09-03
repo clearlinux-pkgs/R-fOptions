@@ -4,7 +4,7 @@
 #
 Name     : R-fOptions
 Version  : 3042.86
-Release  : 3
+Release  : 4
 URL      : https://cran.r-project.org/src/contrib/fOptions_3042.86.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fOptions_3042.86.tar.gz
 Summary  : Rmetrics - Pricing and Evaluating Basic Options
@@ -17,7 +17,7 @@ Requires: R-timeSeries
 BuildRequires : R-fBasics
 BuildRequires : R-timeDate
 BuildRequires : R-timeSeries
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 
 %description
 valuate basic options. This includes the generalized
@@ -40,11 +40,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1530462445
+export SOURCE_DATE_EPOCH=1535988757
 
 %install
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1530462445
+export SOURCE_DATE_EPOCH=1535988757
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -62,9 +62,9 @@ echo "FFLAGS = $FFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 echo "CXXFLAGS = $CXXFLAGS -march=haswell -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --install-tests --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library fOptions
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx2 ; mv $i.avx2 ~/.stash/; done
-echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " > ~/.R/Makevars
-echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512 " >> ~/.R/Makevars
-echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize -mprefer-vector-width=512  " >> ~/.R/Makevars
+echo "CFLAGS = $CFLAGS -march=skylake-avx512 -ftree-vectorize " > ~/.R/Makevars
+echo "FFLAGS = $FFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
+echo "CXXFLAGS = $CXXFLAGS -march=skylake-avx512 -ftree-vectorize " >> ~/.R/Makevars
 R CMD INSTALL --preclean --install-tests --no-test-load --built-timestamp=${SOURCE_DATE_EPOCH} --build  -l %{buildroot}/usr/lib64/R/library fOptions
 for i in `find %{buildroot}/usr/lib64/R/ -name "*.so"`; do mv $i $i.avx512 ; mv $i.avx512 ~/.stash/; done
 echo "CFLAGS = $CFLAGS -ftree-vectorize " > ~/.R/Makevars
@@ -107,6 +107,9 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/fOptions/html/R.css
 /usr/lib64/R/library/fOptions/libs/symbols.rds
 /usr/lib64/R/library/fOptions/unitTests/Makefile
+/usr/lib64/R/library/fOptions/unitTests/report.html
+/usr/lib64/R/library/fOptions/unitTests/report.txt
+/usr/lib64/R/library/fOptions/unitTests/reportSummary.txt
 /usr/lib64/R/library/fOptions/unitTests/runTests.R
 /usr/lib64/R/library/fOptions/unitTests/runit.BasicAmericanOptions.R
 /usr/lib64/R/library/fOptions/unitTests/runit.BinomialTreeOptions.R
