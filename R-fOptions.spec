@@ -4,7 +4,7 @@
 #
 Name     : R-fOptions
 Version  : 3042.86
-Release  : 21
+Release  : 22
 URL      : https://cran.r-project.org/src/contrib/fOptions_3042.86.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fOptions_3042.86.tar.gz
 Summary  : Rmetrics - Pricing and Evaluating Basic Options
@@ -18,7 +18,6 @@ BuildRequires : R-fBasics
 BuildRequires : R-timeDate
 BuildRequires : R-timeSeries
 BuildRequires : buildreq-R
-BuildRequires : util-linux
 
 %description
 valuate basic options. This includes the generalized
@@ -35,21 +34,22 @@ lib components for the R-fOptions package.
 
 %prep
 %setup -q -c -n fOptions
+cd %{_builddir}/fOptions
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1571831918
+export SOURCE_DATE_EPOCH=1589584685
 
 %install
-export SOURCE_DATE_EPOCH=1571831918
+export SOURCE_DATE_EPOCH=1589584685
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
