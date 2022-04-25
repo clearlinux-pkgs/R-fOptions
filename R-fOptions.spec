@@ -4,7 +4,7 @@
 #
 Name     : R-fOptions
 Version  : 3042.86
-Release  : 37
+Release  : 38
 URL      : https://cran.r-project.org/src/contrib/fOptions_3042.86.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/fOptions_3042.86.tar.gz
 Summary  : Rmetrics - Pricing and Evaluating Basic Options
